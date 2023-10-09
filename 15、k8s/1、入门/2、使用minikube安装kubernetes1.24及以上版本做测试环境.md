@@ -53,7 +53,7 @@ systemctl start cri-docker.service && systemctl enable cri-docker.service
   net.ipv4.ip_forward = 1
   ```
   
-  
+  修改后执行`sysctl -p` 以让配置生效
 
 
 

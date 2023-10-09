@@ -37,7 +37,7 @@
   net.ipv4.ip_forward = 1
   ```
   
-  
+  修改后执行`sysctl -p` 以让配置生效
 
 #### 4、安装kubectl工具
 
