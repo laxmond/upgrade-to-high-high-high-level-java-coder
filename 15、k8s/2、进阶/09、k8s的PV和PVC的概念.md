@@ -24,6 +24,8 @@
 
   > pv没有namespace的概念
 
+  使用nfs创建pv
+
   ```yaml
   apiVersion: v1
   kind: PersistentVolume #声明为pv
@@ -43,7 +45,33 @@
       server: 192.168.110.16 #NFS服务端的IP
   ```
 
+  
+
+  使用本地目录创建pv
+
+  ```yaml
+  apiVersion: v1
+  kind: PersistentVolume #声明为pv
+  metadata:
+    name: my-pv #pv的名称
+    labels: #pvc绑定到对应pv通过labels标签方式实现
+    
+      pv: my-pv
+  spec:
+    capacity:
+      storage: 5Gi
+    accessModes:
+      - ReadWriteMany #允许多节点读写
+    storageClassName: nfs #至关重要，需要与下面的pvc.yaml文件中的storageClassName名称一致
+    hostPath:
+      path: /data/share #本地存储数据用的
+  ```
+
+  
+
   创建pv完毕之后，可以通过kubectl get pv来查看pv的状态，STATUS 为 Available，表示 pv就绪，可以被 PVC 申请
+
+  
 
 - 创建pvc
 
